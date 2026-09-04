@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/tokens/colors.css">
+<link rel="stylesheet" href="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/tokens/typography.css">
+<link rel="stylesheet" href="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/styles.css">
+<script src="_ds/seguros-unimed-design-system-11938171-dd18-40ad-9ea6-2cd9e4bace30/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); color: var(--text-primary); background: var(--surface-page); }
+  a { color: var(--text-brand); text-decoration: none; }
+  a:hover { color: var(--colors-blue-400); }
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--colors-grey-200); border-radius: 8px; }
+</style>
+</helmet>
+
+<div style="display:flex; flex-direction:column; height:100vh; overflow:hidden; background:var(--surface-page)">
+
+  <header style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; padding:18px 32px; background:var(--surface-card); border-bottom:1px solid var(--border-subtle)">
+    <div style="display:flex; flex-direction:column; gap:3px">
+      <span style="font-family:var(--font-sans); font-weight:600; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--su-green)">Painel de análise de treinamento</span>
+      <h1 style="margin:0; font-family:var(--font-display); font-weight:500; font-size:24px; line-height:1.24; color:var(--su-navy)">Estrategista em IA para o Mercado de Seguros</h1>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px">
+      <div style="display:flex; flex-direction:column; gap:4px; padding:10px 16px; background:var(--colors-green-0); border:1px solid var(--colors-green-100); border-radius:12px">
+        <span style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--colors-green-700)">Resumos prontos</span>
+        <span style="font-family:var(--font-display); font-size:20px; font-weight:500; color:var(--colors-green-700); line-height:1">4 de 20 aulas</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:4px; padding:10px 16px; background:var(--colors-blue-0); border:1px solid var(--colors-blue-50); border-radius:12px">
+        <span style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--su-navy)">Período</span>
+        <span style="font-family:var(--font-display); font-size:20px; font-weight:500; color:var(--su-navy); line-height:1">ago — out 2026</span>
+      </div>
+    </div>
+  </header>
+
+  <div style="display:flex; flex:1; min-height:0">
+
+    <main style="flex:1; min-width:0; overflow-y:auto; padding:32px 40px 72px">
+      <div style="max-width:1040px; margin:0 auto; display:flex; flex-direction:column; gap:26px">
+
+        <div style="display:flex; flex-direction:column; gap:14px">
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+            <span style="{{ sel.statusStyle }}">{{ sel.status }}</span>
+            <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-tertiary)">{{ sel.bloco }}</span>
+          </div>
+          <h2 style="margin:0; font-family:var(--font-display); font-weight:500; font-size:31px; line-height:1.24; letter-spacing:-0.01em; color:var(--su-navy); text-wrap:pretty">{{ sel.titulo }}</h2>
+          <div style="display:flex; align-items:center; gap:22px; flex-wrap:wrap; font-family:var(--font-sans); font-size:14px; color:var(--text-secondary)">
+            <span>{{ sel.rotulo }}</span>
+            <span>{{ sel.material }}</span>
+          </div>
+        </div>
+
+        <sc-if value="{{ mostrarEmenta }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:22px 24px; background:var(--surface-card); border:1px solid var(--border-subtle); border-radius:16px; display:flex; flex-direction:column; gap:14px">
+          <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--su-green)">Ementa oficial da aula</span>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:10px 24px">
+            <sc-for list="{{ sel.ementa }}" as="e" hint-placeholder-count="4">
+              <div style="display:flex; gap:10px; align-items:flex-start">
+                <span style="flex:none; width:6px; height:6px; margin-top:7px; border-radius:50%; background:var(--su-sky)"></span>
+                <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-primary); text-wrap:pretty">{{ e }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sel.temMaterial }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:26px">
+
+          <div style="padding:28px 32px; background:var(--su-navy); border-radius:16px 16px 0 16px; display:flex; flex-direction:column; gap:10px">
+            <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--su-sky-light)">A ideia central</span>
+            <p style="margin:0; font-family:var(--font-display); font-weight:500; font-size:25px; line-height:1.35; color:#ffffff; text-wrap:pretty">{{ sel.frase }}</p>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px">
+            <sc-for list="{{ sel.destaques }}" as="d" hint-placeholder-count="4">
+              <div style="padding:20px; background:var(--surface-card); border:1px solid var(--border-subtle); border-radius:16px; display:flex; flex-direction:column; gap:8px">
+                <span style="{{ statStyle }}">{{ d.valor }}</span>
+                <span style="font-family:var(--font-sans); font-size:13px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">{{ d.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(330px, 1fr)); gap:16px; align-items:start">
+            <sc-for list="{{ sel.blocos }}" as="b" hint-placeholder-count="4">
+              <div style="padding:24px; background:var(--surface-card); border:1px solid var(--border-subtle); border-radius:16px; box-shadow:0 2px 8px rgba(24,25,26,.05); display:flex; flex-direction:column; gap:14px">
+                <div style="display:flex; flex-direction:column; gap:6px">
+                  <h3 style="margin:0; font-family:var(--font-sans); font-weight:700; font-size:17px; line-height:1.35; color:var(--su-navy); text-wrap:pretty">{{ b.titulo }}</h3>
+                  <p style="margin:0; font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">{{ b.resumo }}</p>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px">
+                  <sc-for list="{{ b.itens }}" as="it" hint-placeholder-count="3">
+                    <div style="display:flex; gap:10px; align-items:flex-start">
+                      <span style="flex:none; width:6px; height:6px; margin-top:7px; border-radius:50%; background:var(--su-green)"></span>
+                      <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-primary); text-wrap:pretty">{{ it }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <sc-for list="{{ sel.fluxos }}" as="f" hint-placeholder-count="1">
+            <div style="padding:24px; background:var(--surface-card); border:1px solid var(--border-subtle); border-radius:16px; display:flex; flex-direction:column; gap:18px">
+              <div style="display:flex; flex-direction:column; gap:4px">
+                <h3 style="margin:0; font-family:var(--font-sans); font-weight:700; font-size:17px; color:var(--su-navy); text-wrap:pretty">{{ f.titulo }}</h3>
+                <span style="font-family:var(--font-sans); font-size:13px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">{{ f.legenda }}</span>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(155px, 1fr)); gap:10px">
+                <sc-for list="{{ f.passos }}" as="p" hint-placeholder-count="4">
+                  <div style="padding:14px 16px; background:var(--colors-blue-0); border-radius:12px 12px 0 12px; display:flex; flex-direction:column; gap:7px">
+                    <span style="font-family:var(--font-display); font-weight:500; font-size:14px; color:var(--colors-blue-400)">{{ p.n }}</span>
+                    <span style="font-family:var(--font-sans); font-weight:600; font-size:14px; line-height:1.35; color:var(--su-navy); text-wrap:pretty">{{ p.label }}</span>
+                    <span style="font-family:var(--font-sans); font-size:12px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">{{ p.desc }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+
+          <sc-for list="{{ sel.antesDepois }}" as="g" hint-placeholder-count="0">
+            <div style="padding:24px; background:var(--surface-card); border:1px solid var(--border-subtle); border-radius:16px; display:flex; flex-direction:column; gap:16px">
+              <div style="display:flex; flex-direction:column; gap:4px">
+                <h3 style="margin:0; font-family:var(--font-sans); font-weight:700; font-size:17px; color:var(--su-navy)">{{ g.titulo }}</h3>
+                <span style="font-family:var(--font-sans); font-size:13px; line-height:1.5; color:var(--text-secondary)">{{ g.legenda }}</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px">
+                <sc-for list="{{ g.pares }}" as="ad" hint-placeholder-count="4">
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+                    <div style="padding:16px; background:var(--colors-grey-50); border:1px solid var(--border-subtle); border-radius:12px; display:flex; flex-direction:column; gap:8px">
+                      <span style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-tertiary)">Antes</span>
+                      <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">{{ ad.antes }}</span>
+                    </div>
+                    <div style="padding:16px; background:var(--colors-green-0); border:1px solid var(--colors-green-100); border-radius:12px; display:flex; flex-direction:column; gap:8px; align-items:flex-start">
+                      <span style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--colors-green-700)">Depois</span>
+                      <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-primary); text-wrap:pretty">{{ ad.depois }}</span>
+                      <span style="padding:4px 10px; background:var(--colors-green-500); border-radius:8px; font-family:var(--font-sans); font-size:11px; font-weight:600; color:#ffffff">{{ ad.tecnica }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ mostrarPraticas }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:24px; background:var(--colors-green-0); border:1px solid var(--colors-green-100); border-radius:16px 16px 0 16px; display:flex; flex-direction:column; gap:16px">
+            <div style="display:flex; flex-direction:column; gap:4px">
+              <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--colors-green-700)">Para levar para a prática</span>
+              <h3 style="margin:0; font-family:var(--font-sans); font-weight:700; font-size:17px; color:var(--su-navy); text-wrap:pretty">{{ sel.praticaTitulo }}</h3>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:10px">
+              <sc-for list="{{ sel.praticas }}" as="p" hint-placeholder-count="4">
+                <div style="display:flex; gap:10px; align-items:flex-start; padding:13px 15px; background:var(--surface-card); border:1px solid var(--colors-green-100); border-radius:12px">
+                  <span style="flex:none; width:17px; height:17px; margin-top:2px; border:1.5px solid var(--colors-green-500); border-radius:6px"></span>
+                  <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-primary); text-wrap:pretty">{{ p }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          </sc-if>
+
+          <div style="display:flex; flex-direction:column; gap:10px; padding-top:22px; border-top:1px solid var(--border-subtle)">
+            <p style="margin:0; font-family:var(--font-slab); font-style:italic; font-size:20px; line-height:1.5; color:var(--su-navy); text-wrap:pretty">{{ sel.citacao }}</p>
+            <span style="font-family:var(--font-sans); font-size:12px; color:var(--text-tertiary)">{{ sel.fonte }}</span>
+          </div>
+
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sel.semMaterial }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:36px; background:var(--surface-card); border:1px dashed var(--border-default); border-radius:16px; display:flex; flex-direction:column; gap:14px; align-items:flex-start">
+          <span style="padding:5px 12px; background:var(--colors-orange-0); border-radius:8px; font-family:var(--font-sans); font-size:12px; font-weight:600; color:var(--colors-orange-700)">Material ainda não recebido</span>
+          <p style="margin:0; max-width:560px; font-family:var(--font-sans); font-size:16px; line-height:1.5; color:var(--text-secondary); text-wrap:pretty">Acima está a ementa oficial desta aula. O resumo dinâmico entra no painel assim que o material do encontro chegar.</p>
+        </div>
+        </sc-if>
+
+      </div>
+    </main>
+
+    <aside style="width:300px; flex:none; display:flex; flex-direction:column; background:var(--surface-card); border-left:1px solid var(--border-subtle)">
+      <div style="padding:20px 24px 15px; display:flex; flex-direction:column; gap:4px; border-bottom:1px solid var(--border-subtle)">
+        <span style="font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--su-green)">Programação</span>
+        <span style="font-family:var(--font-sans); font-size:14px; line-height:1.5; color:var(--text-secondary)">20 encontros · clique na aula para abrir o resumo</span>
+      </div>
+      <div style="flex:1; overflow-y:auto; padding:12px 12px 24px; display:flex; flex-direction:column; gap:6px">
+        <sc-for list="{{ lista }}" as="a" hint-placeholder-count="20">
+          <div style="{{ a.wrap }}">
+            <sc-if value="{{ a.isHeader }}" hint-placeholder-val="{{ false }}">
+              <span style="font-family:var(--font-sans); font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-tertiary)">{{ a.header }}</span>
+            </sc-if>
+            <sc-if value="{{ a.isAula }}" hint-placeholder-val="{{ true }}">
+              <div style="{{ a.style }}" onClick="{{ a.onClick }}">
+                <span style="{{ a.numStyle }}">{{ a.n }}</span>
+                <div style="display:flex; flex-direction:column; gap:3px; min-width:0; flex:1">
+                  <span style="{{ a.tituloStyle }}">{{ a.curto }}</span>
+                  <span style="font-family:var(--font-sans); font-size:12px; line-height:1.4; color:var(--text-tertiary)">{{ a.meta }}</span>
+                </div>
+                <span style="{{ a.tagStyle }}">{{ a.tag }}</span>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </aside>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mostrarEmenta&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;mostrarPraticas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Conteúdo&quot;},&quot;corDestaque&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#f47920&quot;,&quot;options&quot;:[&quot;#f47920&quot;,&quot;#00995d&quot;,&quot;#009edb&quot;,&quot;#002d74&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Aparência&quot;}}">
+const AULAS = [
+{
+  n: "1", bloco: "Fundamentos & Governança", curto: "Mindset, Dados, Viéses e Decisões",
+  titulo: "Mindset, Dados, Viéses e Decisões",
+  rotulo: "18/08/2026 · Kelly Lopes",
+  material: "Material recebido · abertura da especialização · 37 slides",
+  ementa: [
+    "Decisão humana vs. decisão algorítmica: onde a IA entra e onde não entra",
+    "Tipos de viés: cognitivo, seleção, histórico, representação e viés algorítmico",
+    "Justiça, transparência, responsabilidade e trade-offs em seguros (alto impacto)",
+    "Risco regulatório e reputacional (LGPD/SUSEP) e accountability executiva"
+  ],
+  frase: "Antes da IA, existe uma decisão. A tecnologia só amplifica um sistema de decisão que já existe.",
+  destaques: [
+    { valor: "30%", label: "dos projetos de GenAI serão abandonados até o final de 2025, segundo o Gartner" },
+    { valor: "7", label: "camadas da Arquitetura de Decisão" },
+    { valor: "4", label: "níveis de maturidade até a Super Mente Organizacional" },
+    { valor: "8", label: "etapas do Projeto Super Mind, o trabalho final" }
+  ],
+  blocos: [
+    { titulo: "O que a especialização é — e o que não é", resumo: "O curso se posiciona como formação de estrategistas, não de tecnólogos.",
+      itens: ["Sim: formar estrategistas que mudam o mundo e transformar organizações em SuperMinds", "Sim: usar a ciência para transformar o negócio, com mais lucro e eficiência", "Sim: liderar projetos da forma certa", "Não: tecnologia pela tecnologia, matemática pela matemática, bala de prata"] },
+    { titulo: "Por que projetos de IA falham", resumo: "O Gartner recomenda que implementações de IA estejam atreladas a desafios reais do negócio.",
+      itens: ["Baixa qualidade dos dados", "Controles de risco inadequados", "Custos elevados", "Falta de clareza sobre o valor de negócios"] },
+    { titulo: "O ciclo da inteligência organizacional", resumo: "Toda decisão produz conhecimento. Toda organização deveria capturar esse conhecimento; poucas conseguem.",
+      itens: ["Pessoas — ponto de partida e de chegada de toda inteligência organizacional", "Decisões — cada escolha é uma oportunidade de aprendizado estruturado", "Resultados e dados alimentam a base que sustenta a evolução", "IA e novas capacidades ampliam e aceleram o aprendizado humano"] },
+    { titulo: "O que é uma boa decisão", resumo: "Não é a decisão que parece mais inteligente. É a que produz o melhor resultado sob as condições reais.",
+      itens: ["Objetivo — qual resultado queremos maximizar ou minimizar", "Evidência — quais dados e conhecimentos sustentam a escolha", "Incerteza — o que não sabemos e qual a margem de erro", "Trade-offs — quem ganha, quem perde, qual o custo do erro", "Responsável — quem responde pelo resultado"] },
+    { titulo: "Maturidade em quatro níveis", resumo: "Cada nível amplia o que a organização é capaz de perceber, interpretar e agir.",
+      itens: ["Nível 1 — Monitoramento: a empresa enxerga os desvios em tempo real", "Nível 2 — Explicabilidade: traduz sinais técnicos em linguagem de negócio", "Nível 3 — Orquestração: conecta dados, modelos, responsáveis e governança", "Nível 4 — Super Mente Organizacional: aprende, corrige e evolui continuamente com humanos + IA"] },
+    { titulo: "Cadência de governança e regra nº 1", resumo: "A rotina que mantém o ciclo vivo, e o princípio que abre o Projeto Super Mind.",
+      itens: ["Tempo real: a cada alerta", "Semanal: revisão de alertas e decisões tomadas", "Mensal: estratégica, evolução corporativa e das iniciativas", "O projeto não deve começar com “vamos usar IA”, mas com “qual problema queremos resolver”"] }
+  ],
+  fluxos: [
+    { titulo: "Arquitetura de Decisão: o sistema nervoso operacional da empresa", legenda: "A IA monitora, detecta e explica oportunidades e desvios. Humanos decidem, corrigem e evoluem o sistema.",
+      passos: [
+        { n: "01", label: "Dados, contexto e escopo", desc: "Variáveis, retirada de viés e modelagem — onde nasce a vantagem competitiva." },
+        { n: "02", label: "Modelo principal", desc: "Executa a lógica de decisão com dados, regras de negócio e IA em evolução." },
+        { n: "03", label: "Monitoramento autônomo", desc: "EDA e revisão contínua identificam anomalias, drift e perda de performance." },
+        { n: "04", label: "Motor de orquestração", desc: "Conecta dados, modelos e alertas em um ciclo operacional ininterrupto." },
+        { n: "05", label: "Alerta explicável", desc: "Mostra a causa raiz do desvio em linguagem legível ao gestor." },
+        { n: "06", label: "Decisão humana responsável", desc: "Nenhuma alteração de modelo ocorre sem validação humana explícita." },
+        { n: "07", label: "Aprendizado e governança", desc: "Reunião semanal, auditoria mensal e monitoramento da evolução." }
+      ] },
+    { titulo: "Projeto Super Mind: as 8 etapas do trabalho final", legenda: "Em grupos multidisciplinares, identificar um problema real de seguros e propor uma transformação com dados, IA e Arquitetura de Decisão.",
+      passos: [
+        { n: "01", label: "O desafio", desc: "Contexto, dor, público afetado, impacto atual e evidências de que o problema existe." },
+        { n: "02", label: "Pessoas e decisão", desc: "Quem decide, que informação tem, que informação falta, vieses e incentivos." },
+        { n: "03", label: "Dados", desc: "Internos, externos, estruturados, não estruturados, históricos, tempo real — e o que não temos." },
+        { n: "04", label: "Hipótese e experimento", desc: "Indicador, grupo de controle, viés possível e causalidade." },
+        { n: "05", label: "Entrada da IA", desc: "ML, deep learning, GenAI, NLP, visão computacional, recomendação, agentes." },
+        { n: "06", label: "Humano + IA", desc: "O que a máquina faz, o que o humano faz, onde a decisão acontece, quem responde." },
+        { n: "07", label: "Super Mind", desc: "Blueprint ou fluxograma que mostre feedback e sistema adaptativo." },
+        { n: "08", label: "Governança e implementação", desc: "Riscos, dados sensíveis, privacidade, vieses, explicabilidade, quem aprova e monitora." }
+      ] }
+  ],
+  praticaTitulo: "Como levar esta aula para a rotina da equipe",
+  praticas: [
+    "Antes de propor qualquer piloto de IA, escreva em uma página o problema, a decisão afetada e o custo de não agir",
+    "Aplique os cinco critérios de boa decisão nas decisões recorrentes da sua área",
+    "Classifique em que nível de maturidade a operação está hoje: monitoramento, explicabilidade, orquestração ou super mente",
+    "Instale a cadência de governança: alerta em tempo real, revisão semanal, auditoria mensal"
+  ],
+  citacao: "“A IA não gera pressa. Ela torna a organização capaz de perceber, explicar e aprender mais rápido do que qualquer processo manual permite.”",
+  fonte: "Aula 1 · Arquitetura de Decisão"
+},
+{
+  n: "2", bloco: "Fundamentos & Governança", curto: "Design do Processo de IA",
+  titulo: "Design do Processo de IA (do desafio estratégico ao valor)",
+  rotulo: "20/08/2026 · Kelly Lopes",
+  material: "Material recebido · 29 slides · com estudo de caso",
+  ementa: [
+    "Framework de design: desafio → estratégia → dados & IA → implementação / tinkering → operação → governança → valor",
+    "Definição de escopo, métricas (KPIs) e critérios de sucesso",
+    "Erros clássicos em projetos corporativos de IA e como evitá-los",
+    "Mapeamento de stakeholders e responsabilidades (negócio, dados, TI, jurídico, compliance)"
+  ],
+  frase: "IA é o meio, valor é o fim. Nunca comece pela ferramenta, sempre comece pela dor do cliente.",
+  destaques: [
+    { valor: "6", label: "dimensões de qualidade de dados a questionar antes de modelar" },
+    { valor: "6", label: "etapas em que o viés pode entrar no sistema" },
+    { valor: "7", label: "passos do framework do desafio ao valor" },
+    { valor: "7 dias", label: "de espera média do cliente no caso de sinistro de automóvel" }
+  ],
+  blocos: [
+    { titulo: "Troque a pergunta", resumo: "Uma tecnologia só gera valor quando está conectada a uma necessidade real. Nem todo problema precisa de IA.",
+      itens: ["Saia de “o que a IA consegue fazer”", "Vá para “qual problema queremos resolver”", "O primeiro trabalho é transformar um desafio amplo em uma decisão e um resultado mensuráveis"] },
+    { titulo: "Da realidade ao dado, do dado à decisão", resumo: "Dados são registros, marcações e logs da realidade — e nem tudo é observado ou registrado.",
+      itens: ["Realidade: o fenômeno acontece, muitas vezes sem registro organizado", "Dados: registros, eventos e logs guardados de tempo em tempo ou sob certa condição", "Decisão: dados que geram valor, usados para tomar as melhores decisões"] },
+    { titulo: "Qualidade de dados: questione a base", resumo: "Um modelo sofisticado não corrige automaticamente uma base ruim.",
+      itens: ["Completude — o que está faltando e qual período temos", "Acurácia — o valor representa o que deveria representar", "Consistência — o mesmo conceito é registrado da mesma forma", "Atualidade — o dado ainda representa o contexto", "Representatividade — quem está sub-representado ou ausente", "Rastreabilidade — sabemos de onde veio e como foi transformado"] },
+    { titulo: "Onde o viés entra", resumo: "O viés não começa no algoritmo. Ele pode entrar em qualquer etapa do sistema.",
+      itens: ["Pessoa (escolhas e crenças) · Processo (regras e incentivos)", "Dados (amostra e medição) · Modelo (variáveis e objetivo)", "Decisão (uso e interpretação) · Feedback (resultados alteram o próximo ciclo)"] },
+    { titulo: "Seis vieses para reconhecer", resumo: "Vocabulário mínimo para revisar qualquer projeto.",
+      itens: ["Histórico — o passado carrega desigualdades e decisões antigas", "Seleção — só observamos quem entrou, permaneceu ou foi registrado", "Medição — o indicador pode ser um proxy imperfeito do fenômeno", "Confirmação — buscamos evidências que sustentem a hipótese inicial", "Automação — tendemos a aceitar a recomendação da máquina sem questionar", "Feedback — a própria decisão muda os dados que serão usados depois"] },
+    { titulo: "Decida se a IA é necessária", resumo: "A melhor solução pode ser uma regra, uma automação, um painel ou um processo melhor.",
+      itens: ["Regra simples → use regra simples", "Problema determinístico → considere automação", "Previsão ou classificação → machine learning pode fazer sentido", "Linguagem, conteúdo ou interação → IA generativa pode fazer sentido", "Problema complexo e dinâmico → considere solução híbrida"] },
+    { titulo: "Métricas: quatro camadas", resumo: "Não confunda performance do modelo com valor do negócio.",
+      itens: ["Técnica — precisão, recall, erro, acurácia", "Operacional — tempo, volume, produtividade", "Negócio — receita, custo, risco, conversão", "Impacto — a mudança real causada pela solução. Pergunta final: o mundo melhorou depois que colocamos a IA em uso?"] },
+    { titulo: "Estudo de caso: sinistro de automóvel", resumo: "Uma seguradora recebe 10.000 avisos de sinistro por mês; o cliente espera em média 7 dias por uma definição.",
+      itens: ["A empresa percebe cliente insatisfeito, muito trabalho manual, retrabalhos e custo operacional elevado", "O fluxo atual vai do aviso à análise, avaliação do veículo, orçamento, aprovação e reparo", "As sete perguntas do caso: qual é o problema, para quem existe, qual a consequência, quais dados, como saber que foi resolvido, uso da IA e o problema foi resolvido"] }
+  ],
+  fluxos: [
+    { titulo: "Framework: do desafio ao valor", legenda: "Sete passos para sair de um desafio amplo e chegar a valor mensurável.",
+      passos: [
+        { n: "01", label: "Desafio estratégico", desc: "Torne o problema observável: quem é impactado, com que frequência, o que acontece se nada for feito." },
+        { n: "02", label: "Valor esperado", desc: "Receita, eficiência, qualidade, experiência ou risco — valor é a mudança que queremos produzir." },
+        { n: "03", label: "Decisão que precisa melhorar", desc: "Quem decide, com que informação, qual o custo de errar." },
+        { n: "04", label: "Processo onde a decisão acontece", desc: "Entrada → processo → decisão → resultado. A IA só gera valor ligada a uma ação." },
+        { n: "05", label: "Dados disponíveis", desc: "Qualidade, completude, atualidade, histórico, representatividade, privacidade e governança." },
+        { n: "06", label: "Onde a IA poderia entrar", desc: "Ou se regra, automação ou processo melhor resolvem sem IA." },
+        { n: "07", label: "Métrica de sucesso", desc: "Técnica, operacional, de negócio e de impacto." }
+      ] }
+  ],
+  praticaTitulo: "Como levar esta aula para a rotina da equipe",
+  praticas: [
+    "Rode o framework de 7 passos em um desafio real da sua área antes de escolher qualquer ferramenta",
+    "Aplique as 6 perguntas de qualidade de dados na base que você pretende usar",
+    "Faça a varredura de viés nas 6 etapas: pessoa, processo, dados, modelo, decisão e feedback",
+    "Defina a métrica de impacto antes do piloto, não depois"
+  ],
+  citacao: "“A IA só gera valor quando sua saída está ligada a uma ação.”",
+  fonte: "Aula 2 · Design do Processo de IA"
+},
+{
+  n: "3", bloco: "Técnica & Metodologia", curto: "Machine Learning em Negócios",
+  titulo: "Machine Learning em Negócios (fundamentos aplicados)",
+  rotulo: "25/08/2026 · Kelly Lopes",
+  material: "Material recebido · Aplicação de ML no mercado segurador · 31 slides",
+  ementa: [
+    "Aprendizado supervisionado, não supervisionado e semi-supervisionado",
+    "Regressão e classificação: quando usar, como ler resultados e limitações",
+    "Clustering: segmentação, perfis e uso em CRM/retenção",
+    "Overfitting, generalização e validação"
+  ],
+  frase: "ML não elimina o trabalho humano. Ele muda onde o humano coloca sua atenção.",
+  destaques: [
+    { valor: "8", label: "etapas do pipeline de machine learning, da pergunta à ação humana" },
+    { valor: "100 mil", label: "sinistros passam a ser triados para os 2.000 casos de maior risco de fraude" },
+    { valor: "8%", label: "dos clientes identificados com maior propensão a churn, em vez de ligar para todos" },
+    { valor: "3", label: "clusters de carteira no exemplo: jovem conectado, sênior alta renda e risco/baixo engajamento" }
+  ],
+  blocos: [
+    { titulo: "O que é um modelo", resumo: "Um modelo é uma representação simplificada da realidade, criada para servir a um determinado propósito.",
+      itens: ["Modelos de ML são algoritmos que aprendem padrões a partir de dados históricos", "Servem para prever, classificar ou identificar padrões em dados novos", "Em vez de programar todas as regras, fornecemos exemplos e o modelo aprende as relações"] },
+    { titulo: "Clusterização na prática", resumo: "Agrupa dados por similaridade para revelar segmentos e padrões ocultos, sem rótulos prévios.",
+      itens: ["Pergunta que responde: como meus clientes se agrupam naturalmente por comportamento, sinistros e características", "Algoritmos comuns: K-Means e K-Medoids, clusterização hierárquica, DBSCAN, Gaussian Mixture Models", "Novos registros são atribuídos ao cluster mais próximo"] },
+    { titulo: "Aplicações no mercado", resumo: "Onde a clusterização entra na operação de uma seguradora.",
+      itens: ["Microssegmentação da carteira de clientes", "Criação de produtos e coberturas sob medida", "Detecção de anomalias e comportamentos atípicos", "Estratégias personalizadas de atendimento e retenção"] },
+    { titulo: "O papel do profissional de seguros", resumo: "A pergunta que fecha a aula: qual é o papel de quem conhece o negócio na construção do pipeline?",
+      itens: ["Traduzir o problema de negócio em pergunta modelável", "Escolher a safra e as variáveis que fazem sentido no contexto", "Ler o resultado com senso crítico e decidir a ação"] }
+  ],
+  fluxos: [
+    { titulo: "Pipeline de machine learning", legenda: "Da pergunta de negócio à ação humana — o desenho apresentado na aula.",
+      passos: [
+        { n: "01", label: "Problema de negócio", desc: "O que precisa mudar na operação." },
+        { n: "02", label: "Pergunta", desc: "O que a seguradora poderia prever antes que o evento acontecesse." },
+        { n: "03", label: "Histórico de dados / safra", desc: "O período que representa o fenômeno." },
+        { n: "04", label: "Variáveis e features", desc: "O que entra no modelo e por quê." },
+        { n: "05", label: "Treinamento", desc: "O modelo aprende os padrões." },
+        { n: "06", label: "Validação", desc: "O modelo generaliza para dados novos?" },
+        { n: "07", label: "Resultado", desc: "Scores e probabilidades por caso." },
+        { n: "08", label: "Ação humana", desc: "Onde a decisão acontece e o valor aparece." }
+      ] }
+  ],
+  antesDepois: [
+    { titulo: "Antes e depois do ML", legenda: "Quatro reescritas de rotinas reais, com a técnica correspondente.",
+      pares: [
+        { antes: "“Temos 100 mil sinistros. Precisamos investigar.”", depois: "“O modelo classificou os 100 mil casos e indicou os 2.000 com maior probabilidade de fraude.”", tecnica: "Classificação supervisionada" },
+        { antes: "“Precisamos ligar para os clientes para tentar retenção.”", depois: "“O modelo identificou os 8% de clientes com maior propensão a churn.”", tecnica: "Score de churn" },
+        { antes: "“Precisamos avaliar todos os documentos.”", depois: "“O modelo identificou os documentos com maior probabilidade de inconsistência.”", tecnica: "Detecção de fraudes" },
+        { antes: "“Precisamos analisar todos os leads.”", depois: "“O modelo ranqueou os leads pela probabilidade de conversão.”", tecnica: "Propensão de vendas" }
+      ] }
+  ],
+  praticaTitulo: "Como levar esta aula para a rotina da equipe",
+  praticas: [
+    "Liste três rotinas da sua área que hoje tratam 100% da fila e poderiam ser priorizadas por score",
+    "Para cada uma, escreva a pergunta preditiva em uma frase e o indicador de sucesso",
+    "Verifique se existe safra histórica suficiente antes de prometer o modelo",
+    "Defina quem age sobre o score: sem ação humana definida, o modelo não gera valor"
+  ],
+  citacao: "“O que uma seguradora poderia prever antes que o evento acontecesse?”",
+  fonte: "Aula 3 · Aplicação de ML no mercado segurador"
+},
+{
+  n: "4", bloco: "Técnica & Metodologia", curto: "Deep Learning e Fronteiras Tecnológicas",
+  titulo: "Deep Learning e Fronteiras Tecnológicas",
+  rotulo: "27/08/2026 · Rogério Emygdio",
+  material: "Material recebido · Machine Learning em Seguros, aplicações práticas · 35 slides",
+  ementa: [
+    "Redes neurais: intuição, capacidades e limites",
+    "Texto, imagem e som: por que DL muda o jogo",
+    "Pré-treinamento, fine-tuning e inferência",
+    "Riscos: opacidade, drift, custo computacional e governança",
+    "Playground e hiperparâmetros"
+  ],
+  frase: "O machine learning não vai substituir seu trabalho, vai potencializá-lo. A tecnologia cuida da operação pesada; você cuida da empatia, da confiança e do relacionamento.",
+  destaques: [
+    { valor: "85%", label: "de redução de tempo no processo de cotação com assistente virtual (case Icatu)" },
+    { valor: "40s", label: "por cotação processada pelo assistente" },
+    { valor: "70%", label: "de assertividade no valor indicado a partir de 4 informações básicas" },
+    { valor: "3", label: "tipos de aprendizado: supervisionado, não supervisionado e por reforço" }
+  ],
+  blocos: [
+    { titulo: "O razoável não está no dicotômico", resumo: "A abertura estatística da aula: a única certeza é que a incerteza é plena.",
+      itens: ["A estatística busca identificar padrões em meio ao caos das coisas", "Se a verdade existe, provavelmente ela estará num intervalo", "A boa estatística é norteada não pela melhor resposta, mas pela pergunta de maior relevância e objetividade", "Somos sensorialmente limitados e percebemos apenas parte do que é real"] },
+    { titulo: "O que é machine learning", resumo: "Um sistema que identifica padrões para fazer previsões, como o aprendizado humano — em escala e velocidade exponenciais.",
+      itens: ["Aprendizado humano: gradual, intuitivo, com limite natural de velocidade e de variáveis simultâneas", "Machine learning: aprende com vastas bases históricas e analisa milhões de informações simultaneamente", "Ciclo prático: dados históricos → o algoritmo aprende perfis de risco → faz previsões sobre novos clientes"] },
+    { titulo: "Os três tipos de aprendizado", resumo: "Cada categoria com seu exemplo no seguro.",
+      itens: ["Supervisionado — aprende com exemplos rotulados; precificação baseada em histórico de perfil de risco", "Não supervisionado — busca padrões ocultos; segmentação de clientes por comportamento de compra", "Por reforço — aprende por tentativa, erro e recompensa; otimização contínua de ofertas em canais digitais"] },
+    { titulo: "Casos reais no dia a dia do corretor", resumo: "Três aplicações que já operam nos bastidores do mercado.",
+      itens: ["Pré-aprovação ágil: proposta de seguro de vida pré-aprovada em segundos, sem retrabalho de documentação", "Cotação preditiva: 4 informações geram estimativa do valor final do seguro auto com até 70% de assertividade", "Automação de atendimento: assistente virtual com integrações a WhatsApp e sistemas da seguradora"] },
+    { titulo: "Os riscos que você precisa conhecer", resumo: "Três formas de o risco se manifestar na prática.",
+      itens: ["Discriminação algorítmica — o modelo pode aprender vieses históricos e cobrar injustamente de certos grupos ou regiões", "Dados desatualizados e alucinações — a IA generativa cria informações incorretas com convicção; sempre revise", "Violação de privacidade — expor dados sensíveis em ferramentas públicas quebra a LGPD"] },
+    { titulo: "Como usar IA com segurança", resumo: "Quatro regras de uso apresentadas na aula.",
+      itens: ["Nunca insira dados pessoais identificáveis (CPF, nome completo, endereço) em plataformas públicas", "Revisão humana sempre: valide qualquer texto, cotação ou informação antes de enviar ao cliente", "Apoio, não substituto: a IA não substitui julgamento e empatia profissional", "Rastreabilidade: documente e justifique decisões em que a IA foi base de análise"] },
+    { titulo: "O corretor consultivo", resumo: "As pessoas não compram de prateleira, compram por jornada. Cabe ao corretor usar dados para antecipar o contexto.",
+      itens: ["Casamento — alteração no estado civil e dependentes", "Promoção — aumento de renda e novo patamar de bens", "Mudança — novo CEP altera a precificação de risco", "Aquisição — compra de veículo, imóvel ou negócio"] },
+    { titulo: "Seu valor na era dos dados", resumo: "As três competências que a aula coloca no centro.",
+      itens: ["Alfabetização de dados — ler indicadores, interpretar painéis e tirar conclusões reais", "Comunicação consultiva — traduzir insights complexos em recomendações simples e protetivas", "Integração fluida — conectar WhatsApp, CRM e portais de seguradoras para uma jornada mais rápida"] }
+  ],
+  fluxos: [
+    { titulo: "Oficina: análise de carteira com IA generativa", legenda: "As três atividades práticas propostas na aula.",
+      passos: [
+        { n: "01", label: "Analisar a carteira", desc: "Lista de 100 clientes de seguro auto com idade, profissão, cidade, veículo, tempo de cliente e sinistros — descobrir padrões para cross-selling." },
+        { n: "02", label: "Atender o cliente", desc: "Criar explicação didática e formatada para mobile sobre a diferença entre dois produtos." },
+        { n: "03", label: "Extrair padrões", desc: "Tabela por região com penetração de auto, renda média e exposição a risco — decidir onde prospectar residencial." },
+        { n: "04", label: "O insight do exercício", desc: "Zona Norte: baixa penetração de auto (38%) com alta exposição a risco (38%) indica demanda reprimida por proteção residencial." }
+      ] }
+  ],
+  praticaTitulo: "Como levar esta aula para a rotina da equipe",
+  praticas: [
+    "Rode a oficina de prompts com a equipe usando uma amostra anonimizada da carteira",
+    "Publique a regra de segurança: nada de dado pessoal identificável em ferramenta pública de IA",
+    "Inclua revisão humana obrigatória em qualquer texto gerado que vá para o cliente",
+    "Mapeie os gatilhos de jornada (casamento, promoção, mudança, aquisição) nos dados que você já tem"
+  ],
+  citacao: "“A tecnologia nunca tirou espaço do corretor. Ela substitui quem não a usa.”",
+  fonte: "Aula 4 · citação de Emir Zanatto, head de seguros da Serasa Experian"
+},
+{ n: "5", bloco: "Aplicações no Setor", curto: "Aplicações de ML no Mercado Segurador", titulo: "Aplicações de ML no Mercado Segurador (casos e desenho)", rotulo: "01/09/2026 · Kelly Lopes", material: "Aguardando material",
+  ementa: ["Subscrição inteligente: score de risco, precificação e detecção de anomalias", "Sinistros: triagem, estimativa de custo, visão computacional, antifraude", "Experiência do cliente: churn, recomendação, personalização e next-best-action", "Matriz de priorização: impacto x viabilidade x risco"] },
+{ n: "6", bloco: "Aplicações no Setor", curto: "Criatividade com Big Data", titulo: "Criatividade com Big Data (inovação orientada por evidências)", rotulo: "03/09/2026 · Rogério Emygdio", material: "Aguardando material",
+  ementa: ["Dados como motor criativo: da observação ao insight acionável", "Referências: personalização em escala aplicada a seguros", "Hipóteses de valor: cross/upsell, retenção, educação e engajamento", "Design de proposta de valor com dados"] },
+{ n: "7", bloco: "Técnica & Metodologia", curto: "Desenho Experimental e Causalidade", titulo: "Desenho Experimental e Causalidade (o que funciona de verdade)", rotulo: "08/09/2026 · Kelly Lopes", material: "Aguardando material",
+  ementa: ["Correlação vs. causalidade em decisões de negócio", "A/B testing, grupos de controle e desenho de experimentos", "Métricas de sucesso e armadilhas (viés de seleção, sazonalidade, interferência)", "Base para “test and learn” em ambientes regulados"] },
+{ n: "8", bloco: "Aplicações no Setor", curto: "IA Generativa: fundamentos, riscos e governança", titulo: "IA Generativa (GenAI): fundamentos, riscos e governança", rotulo: "10/09/2026 · Fichman", material: "Aguardando material",
+  ementa: ["LLMs e modelos de difusão: o que são e como funcionam (visão prática)", "Uso seguro em seguros: comunicação, sumarização, apoio a análise e documentação", "Alucinação, viés, privacidade, propriedade intelectual e compliance", "Guardrails: políticas, prompts, validação humana e observabilidade", "Hiperpersonalização: junção de IA aplicada com GenAI"] },
+{ n: "9", bloco: "Aplicações no Setor", curto: "Automação + IA Aplicada + GenAI", titulo: "Automação + IA Aplicada + GenAI (blueprint de automação inteligente)", rotulo: "15/09/2026 · Jordão", material: "Aguardando material",
+  ementa: ["Automação tradicional vs. automação inteligente (RPA + ML + GenAI)", "Orquestração de decisões e fluxos (triagem, roteamento, priorização)", "Indicadores operacionais: tempo, custo, qualidade, risco", "Casos: redução de churn, melhoria de SLA e eficiência em sinistros"] },
+{ n: "10", bloco: "Design Humano & Estratégia", curto: "Human + AI Design: máquinas que aprendem", titulo: "Human + AI Design: máquinas que aprendem (feedback loops)", rotulo: "17/09/2026 · Jordão", material: "Aguardando material",
+  ementa: ["Sistemas adaptativos: aprendizado contínuo e ciclos de feedback", "IA colaborativa vs. IA autônoma: níveis de autonomia e responsabilidades", "Drift, monitoramento, atualização e gestão de incidentes", "Como transformar operação em fonte de dados de melhoria"] },
+{ n: "11", bloco: "Design Humano & Estratégia", curto: "Interfaces Inteligentes e Explainability", titulo: "Interfaces Inteligentes e Explainability (HCI em alto impacto)", rotulo: "22/09/2026 · Fichman", material: "Aguardando material",
+  ementa: ["Design centrado no humano: transparência, controle e confiança", "Explainability em seguros: o que explicar, para quem e como", "UX de decisão: redução de erro humano, escalabilidade e auditoria", "Inclusividade e acessibilidade em interfaces"] },
+{ n: "12", bloco: "Design Humano & Estratégia", curto: "SuperMinds e Organizações Inteligentes", titulo: "SuperMinds e Organizações Inteligentes (escala com cultura e processo)", rotulo: "24/09/2026 · Jordão", material: "Aguardando material",
+  ementa: ["Conceito MIT: inteligência coletiva aumentada (humano + máquina)", "Arquitetura organizacional para IA: cultura, processos, incentivos, papéis", "Times híbridos e governança: responsabilidades claras e operação sustentável", "Como sair do “tiro único” e construir capacidade contínua"] },
+{ n: "13", bloco: "Design Humano & Estratégia", curto: "Fronteiras da Pesquisa e Mercado", titulo: "Fronteiras da Pesquisa e Mercado (tendências que importam)", rotulo: "29/09/2026 · Kelly Lopes", material: "Aguardando material",
+  ementa: ["Agentes autônomos: potencial e riscos em atendimento e operações", "AutoML: ganhos e cuidados (democratização vs. governança)", "Edge AI e privacidade: telemática, IoT e baixa latência", "Quantum AI (visão executiva): quando faz sentido e quando é hype"] },
+{ n: "14", bloco: "Design Humano & Estratégia", curto: "Modelos de Negócio com IA", titulo: "Modelos de Negócio com IA (criar e defender vantagem competitiva)", rotulo: "01/10/2026 · Kelly Lopes", material: "Aguardando material",
+  ementa: ["Como IA cria e destrói indústrias: mecanismos de vantagem", "Estratégias de diferenciação: dados exclusivos, processos, experiência e rede", "Monetização e business case: custo, benefício, riscos e tempo de payback", "Portfólio de casos: priorização e roadmap"] },
+{ n: "15", bloco: "Mão na Massa & Projetos", curto: "Laboratório de Projeto SuperMind I", titulo: "Laboratório de Projeto SuperMind I (escopo e dados)", rotulo: "06/10/2026 · Kelly Lopes e Jordão", material: "Aguardando material",
+  ementa: ["Escolha final do desafio e recorte do escopo (MVP)", "Mapa de dados: fontes, qualidade, privacidade, acesso e governança", "Métricas e critérios de sucesso (KPIs)", "Plano de execução em sprints"] },
+{ n: "16", bloco: "Mão na Massa & Projetos", curto: "Palestra com personalidade do mercado", titulo: "Palestra com personalidade do mercado segurador que usa IA aplicada a negócios", rotulo: "08/10/2026 · convidado", material: "Aguardando material",
+  ementa: ["Palestra com profissional de destaque no mercado segurador que utiliza IA aplicada a negócios", "Case a ser definido pelo palestrante"] },
+{ n: "17", bloco: "Mão na Massa & Projetos", curto: "Laboratório de Conselho Consultivo", titulo: "Laboratório de Conselho Consultivo", rotulo: "13/10/2026 · Kelly Lopes e Jordão", material: "Aguardando material",
+  ementa: ["Apresentação para alunos de frente de IA a ser implantada na empresa por “CEO”", "Cada grupo atuará como um Conselho Consultivo"] },
+{ n: "18", bloco: "Mão na Massa & Projetos", curto: "Laboratório de Projeto SuperMind II", titulo: "Laboratório de Projeto SuperMind II (arquitetura, governança e operação)", rotulo: "15/10/2026 · Kelly Lopes e Jordão", material: "Aguardando material",
+  ementa: ["Arquitetura de solução: fluxo, modelos, automação, validação humana", "Guardrails e conformidade: LGPD, auditoria, incidentes e documentação", "Observabilidade: métricas, drift, qualidade e processos de melhoria", "Preparação para banca: narrativa executiva e demonstração de valor"] },
+{ n: "19", bloco: "Mão na Massa & Projetos", curto: "Apresentações Finais — Parte I", titulo: "Apresentações Finais – Parte I (banca e avaliação)", rotulo: "20/10/2026 · banca", material: "Aguardando material",
+  ementa: ["Pitch estruturado: problema, solução, impacto, viabilidade e governança", "Demonstração do projeto e defesa técnica e estratégica", "Critérios de avaliação: valor, ética e conformidade, viabilidade e integração humanos + IA", "Feedback final e próximos passos (roadmap)"] },
+{ n: "20", bloco: "Mão na Massa & Projetos", curto: "Apresentações Finais — Parte II", titulo: "Apresentações Finais – Parte II (banca e avaliação)", rotulo: "22/10/2026 · banca", material: "Aguardando material",
+  ementa: ["Pitch estruturado: problema, solução, impacto, viabilidade e governança", "Demonstração do projeto e defesa técnica e estratégica", "Critérios de avaliação: valor, ética e conformidade, viabilidade e integração humano + IA", "Feedback final e próximos passos (roadmap)"] }
+];
+
+class Component extends DCLogic {
+  state = { i: 0 };
+
+  renderVals() {
+    const cor = this.props.corDestaque ?? "var(--su-orange)";
+    const aulas = AULAS.map((a, idx) => Object.assign({}, a, {
+      idx,
+      temMaterial: idx < 4,
+      pronto: idx < 4
+    }));
+    const cur = aulas[this.state.i];
+
+    const sel = Object.assign({}, cur, {
+      semMaterial: !cur.temMaterial,
+      status: cur.pronto ? "Resumo disponível" : "Aguardando material",
+      statusStyle: cur.pronto
+        ? "padding:5px 12px; border-radius:8px; background:var(--colors-green-0); color:var(--colors-green-700); font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase"
+        : "padding:5px 12px; border-radius:8px; background:var(--colors-orange-0); color:var(--colors-orange-700); font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase",
+      destaques: cur.destaques || [],
+      blocos: cur.blocos || [],
+      fluxos: cur.fluxos || [],
+      antesDepois: cur.antesDepois || [],
+      praticas: cur.praticas || [],
+      ementa: cur.ementa || []
+    });
+
+    let ultimoBloco = null;
+    const lista = [];
+    aulas.forEach((a) => {
+      const ativo = a.idx === this.state.i;
+      const novoBloco = a.bloco !== ultimoBloco;
+      ultimoBloco = a.bloco;
+      lista.push({
+        n: a.n,
+        curto: a.curto,
+        meta: a.rotulo,
+        isHeader: novoBloco,
+        isAula: true,
+        header: a.bloco,
+        wrap: novoBloco
+          ? "display:flex; flex-direction:column; gap:8px; padding:14px 8px 0"
+          : "display:flex; flex-direction:column",
+        onClick: () => this.setState({ i: a.idx }),
+        style: "display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border-radius:12px; cursor:pointer; transition:background 150ms ease, border-color 150ms ease; border:1px solid "
+          + (ativo ? "var(--su-navy)" : "transparent")
+          + "; background:" + (ativo ? "var(--colors-blue-0)" : "transparent"),
+        numStyle: "flex:none; width:30px; height:30px; display:flex; align-items:center; justify-content:center; border-radius:8px; font-family:var(--font-display); font-size:14px; font-weight:500; "
+          + (ativo
+            ? "background:var(--su-navy); color:#ffffff"
+            : (a.pronto ? "background:var(--colors-green-0); color:var(--colors-green-700)" : "background:var(--colors-grey-100); color:var(--text-tertiary)")),
+        tituloStyle: "font-family:var(--font-sans); font-size:14px; line-height:1.35; text-wrap:pretty; font-weight:" + (ativo ? "700" : "600")
+          + "; color:" + (ativo ? "var(--su-navy)" : "var(--text-primary)"),
+        tagStyle: "flex:none; margin-top:6px; width:8px; height:8px; border-radius:50%; background:" + (a.pronto ? "var(--su-green)" : "var(--colors-grey-200)"),
+        tag: ""
+      });
+    });
+
+    return {
+      sel,
+      lista,
+      statStyle: "font-family:var(--font-display); font-weight:500; font-size:32px; line-height:1; color:" + cor,
+      mostrarEmenta: this.props.mostrarEmenta ?? true,
+      mostrarPraticas: this.props.mostrarPraticas ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>
